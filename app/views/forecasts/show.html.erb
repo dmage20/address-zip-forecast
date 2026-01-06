@@ -1,0 +1,111 @@
+<%= turbo_frame_tag "forecast_results" do %>
+  <div class="bg-white shadow-lg rounded-lg p-8">
+    <!-- Cache Indicator -->
+    <div class="mb-6">
+      <% if @result.cached? %>
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"/>
+            <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"/>
+          </svg>
+          Cached result (updated within last 30 minutes)
+        </span>
+      <% else %>
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          Fresh data
+        </span>
+      <% end %>
+    </div>
+
+    <!-- Location Info -->
+    <div class="border-b border-gray-200 pb-6 mb-6">
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">
+        <%= @result.location.formatted_address %>
+      </h2>
+      <p class="text-gray-600">Zip Code: <%= @result.location.zip_code %></p>
+    </div>
+
+    <!-- Current Weather -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold text-gray-900 mb-4">Current Weather</h3>
+      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6">
+        <div class="flex items-center justify-between">
+          <!-- Weather Icon and Temperature -->
+          <div class="flex items-center">
+            <%= image_tag "https://openweathermap.org/img/wn/#{@result.weather_data.icon}@2x.png",
+                alt: @result.weather_data.description,
+                class: "w-24 h-24" %>
+            <div class="ml-4">
+              <div class="text-5xl font-bold text-gray-900">
+                <%= @result.weather_data.current_temp %>°F
+              </div>
+              <div class="text-lg text-gray-700 capitalize mt-1">
+                <%= @result.weather_data.description %>
+              </div>
+            </div>
+          </div>
+
+          <!-- High/Low -->
+          <div class="text-right">
+            <div class="text-gray-600">
+              <div class="text-2xl font-semibold text-red-600">
+                High: <%= @result.weather_data.temp_max %>°F
+              </div>
+              <div class="text-2xl font-semibold text-blue-600 mt-2">
+                Low: <%= @result.weather_data.temp_min %>°F
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5-Day Forecast -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold text-gray-900 mb-4">5-Day Forecast</h3>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <% @result.weather_data.extended_forecast.each do |day| %>
+          <div class="bg-gray-50 rounded-lg p-4 text-center hover:bg-gray-100 transition">
+            <!-- Date -->
+            <div class="font-semibold text-gray-900 mb-2">
+              <%= day[:date].strftime('%a') %>
+            </div>
+            <div class="text-sm text-gray-600 mb-3">
+              <%= day[:date].strftime('%b %d') %>
+            </div>
+
+            <!-- Weather Icon -->
+            <%= image_tag "https://openweathermap.org/img/wn/#{day[:icon]}@2x.png",
+                alt: day[:description],
+                class: "w-16 h-16 mx-auto" %>
+
+            <!-- Description -->
+            <div class="text-sm text-gray-700 capitalize mb-3">
+              <%= day[:description] %>
+            </div>
+
+            <!-- Temperature Range -->
+            <div class="space-y-1">
+              <div class="text-lg font-bold text-gray-900">
+                <%= day[:temp_max].round %>°F
+              </div>
+              <div class="text-sm text-gray-600">
+                <%= day[:temp_min].round %>°F
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Search Again Button -->
+    <div class="text-center pt-6 border-t border-gray-200">
+      <%= link_to "Search Another Address",
+          root_path,
+          class: "inline-block bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200" %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,63 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Weather Forecast Lookup</h1>
+      <p class="text-gray-600">Enter an address to get current conditions and a 5-day forecast</p>
+    </div>
+
+    <!-- Error Message Display -->
+    <% if @error %>
+      <div class="mb-6 bg-red-50 border-l-4 border-red-400 p-4 rounded">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-red-700">
+              <%= @error %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Search Form Card -->
+    <div class="bg-white shadow-lg rounded-lg p-8 mb-8">
+      <%= form_with url: forecast_path, method: :get,
+                    data: { turbo_frame: "forecast_results" },
+                    class: "space-y-6" do |f| %>
+
+        <div>
+          <%= f.label :address, "Enter an address:", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= f.text_field :address,
+              placeholder: "e.g., 1600 Pennsylvania Avenue NW, Washington, DC",
+              class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition",
+              required: true,
+              autofocus: true,
+              value: params[:address] %>
+          <p class="mt-2 text-sm text-gray-500">
+            Try a full street address, city and state, or just a zip code
+          </p>
+        </div>
+
+        <%= f.submit "Get Forecast",
+            class: "w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 cursor-pointer" %>
+      <% end %>
+    </div>
+
+    <!-- Turbo Frame for Results -->
+    <!-- This frame will be replaced with forecast results from show.html.erb -->
+    <%= turbo_frame_tag "forecast_results" do %>
+      <!-- Empty initially - will be filled with forecast data after search -->
+    <% end %>
+
+    <!-- Footer Info -->
+    <div class="mt-8 text-center text-sm text-gray-600">
+      <p>Powered by OpenWeatherMap API and OpenStreetMap Nominatim</p>
+      <p class="mt-1">Data cached for 30 minutes per zip code for optimal performance</p>
+    </div>
+  </div>
+</div>
