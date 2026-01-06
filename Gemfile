@@ -72,7 +72,7 @@ group :test do
   gem "webmock", "~> 3.23"        # Mock HTTP requests in tests
   gem "vcr", "~> 6.3"             # Record HTTP interactions for tests
   gem "simplecov", require: false # Code coverage reporting
-  gem "shoulda-matchers", "~> 6.0"
+  gem "shoulda-matchers", "~> 7.0"
 end
 
 group :development do
