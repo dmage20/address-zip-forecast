@@ -1,4 +1,6 @@
 # Address-Zip-Forecast
+<img width="1610" height="886" alt="centered-layout" src="https://github.com/user-attachments/assets/f222e569-7e13-452f-9953-ac50287131bb" />
+
 
 A production-quality Ruby on Rails weather forecast application that accepts an address and displays current weather conditions plus a 5-day forecast. Built with Rails 8.1.1 and Ruby 3.3.6 as a technical assessment demonstrating senior-level software engineering practices.
 
