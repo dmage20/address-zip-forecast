@@ -139,7 +139,7 @@ RSpec.describe GeocodingService do
           address: 'Alabama, United States',
           data: { 'addresstype' => 'state' }
         )
-        allow(Geocoder).to receive(:search).with('Alabama', params: { countrycodes: 'us' }).and_return([mock_result])
+        allow(Geocoder).to receive(:search).with('Alabama', params: { countrycodes: 'us' }).and_return([ mock_result ])
 
         result = service.geocode('Alabama')
         expect(result).to be_nil
@@ -154,7 +154,7 @@ RSpec.describe GeocodingService do
           address: 'United States',
           data: { 'addresstype' => 'country' }
         )
-        allow(Geocoder).to receive(:search).with('United States', params: { countrycodes: 'us' }).and_return([mock_result])
+        allow(Geocoder).to receive(:search).with('United States', params: { countrycodes: 'us' }).and_return([ mock_result ])
 
         result = service.geocode('United States')
         expect(result).to be_nil
@@ -169,7 +169,7 @@ RSpec.describe GeocodingService do
           address: 'Birmingham, Alabama, United States',
           data: { 'addresstype' => 'city', 'address' => { 'postcode' => '35203' } }
         )
-        allow(Geocoder).to receive(:search).with('Birmingham, Alabama', params: { countrycodes: 'us' }).and_return([mock_result])
+        allow(Geocoder).to receive(:search).with('Birmingham, Alabama', params: { countrycodes: 'us' }).and_return([ mock_result ])
 
         result = service.geocode('Birmingham, Alabama')
         expect(result).to be_a(GeocodingService::Location)

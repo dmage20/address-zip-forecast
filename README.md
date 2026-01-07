@@ -63,7 +63,7 @@ Visit http://localhost:3000
 bundle exec rspec
 ```
 
-**Code Coverage**: 73%+ (run `open coverage/index.html` to view report)
+**Code Coverage**: 91%+ (run `open coverage/index.html` to view report)
 
 **Security Scan**:
 ```bash
@@ -101,9 +101,8 @@ See `ARCHITECTURE.md` for detailed object decomposition.
 
 ## Scalability
 
-- **Solid Cache**: Database-backed caching, easily sharded
-- **Stateless Services**: Horizontal scaling across app servers
-- **Zip-Code Caching**: Reduces API calls by 80%+
+- **Solid Cache**: Database-backed caching
+- **Zip-Code Caching**: Reduces API calls
 - **Service Isolation**: Easy to extract to microservices
 
 ---
