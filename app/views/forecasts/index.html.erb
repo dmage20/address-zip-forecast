@@ -37,7 +37,8 @@
               class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition",
               required: true,
               autofocus: true,
-              value: params[:address] %>
+              value: params[:address],
+              data: { controller: "address-autocomplete" } %>
           <p class="mt-2 text-sm text-gray-500">
             Try a full street address, city and state, or just a zip code
           </p>

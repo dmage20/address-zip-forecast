@@ -6,6 +6,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Address Zip Forecast">
     <meta name="mobile-web-app-capable" content="yes">
+    <script async 
+      src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_PLACES_API_KEY'] %>&libraries=places&loading=async&callback=Function.prototype">
+    </script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
