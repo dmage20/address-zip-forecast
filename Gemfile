@@ -43,7 +43,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 # API clients for weather and geocoding
-gem "httparty", "~> 0.22"  # HTTP client for OpenWeatherMap API
+gem "httparty", "~> 0.24"  # HTTP client for OpenWeatherMap API
 gem "geocoder", "~> 1.8"   # Geocoding service (address to coordinates)
 gem "openssl", ">= 3.1.2"
 
